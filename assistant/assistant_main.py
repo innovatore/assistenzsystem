@@ -17,8 +17,7 @@ pin4 = 18
 
 glitchValue = 200
 assistant_music.PlayWaitMusic()
-#os.system("/sbin/ifconfig eth1 down")
-#time.sleep(1)
+
 os.system("amixer sset PCM,0 95%")
 
 def InitializeData():
@@ -58,7 +57,5 @@ assistant_music.SilenceSounds()
 assistant_music.SaySomething("System gestartet, warte auf Eingabe.")
 
 while True:
-#  time.sleep(600)
-#  assistant_weather.LoadWeatherData()
-#    time.sleep(1)
+#    assistant_weather.LoadWeatherData()
     print(assistant_volumecontrol.Measure(pi))
