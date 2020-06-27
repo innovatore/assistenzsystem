@@ -35,7 +35,6 @@ def PlayNews(g, l, t):
             if (newsId == len(newsList)):
                 newsList = 0
                 newsId = 0
-#        PlayRSS(newsId)
         PlayRandomRSS()
         newsId = newsId + 1
         
@@ -64,11 +63,8 @@ def PlayRandomRSS():
 def PlayNewsListItem(newsItem):
     try:
         outputstr = newsItem.title + ": " + newsItem.description
-#            outputstr = newsItem.title + ": " + newsItem.summary
         outputstr = re.sub("<.*?>", "", outputstr)
         outputstr = outputstr.replace("'", "")
-#            outputstr = outputstr.encode('utf-8')
-#           outputstr = outputstr.replace('\xc3', '')
         return assistant_soundprocess.CreateSoundProcessAplay(assistant_soundprocess.CreateVoiceOut(outputstr), voiceVolume)
     except KeyError:
         outputstr = "Encoding fehlgeschlagen!"
@@ -78,17 +74,13 @@ def PlayNewsListItem(newsItem):
 def PlayNewsListItemById(newsId):
     print (newsId)
     print (" : ")
-#       print (newsList.entries)
     post = newsList.entries[newsId]
     print (post)
 
     try:
         outputstr = post.title + ": " + post.description
-#            outputstr = post.title + ": " + post.summary
         outputstr = re.sub("<.*?>", "", outputstr)
         outputstr = outputstr.replace("'", "")
-#            outputstr = outputstr.encode('utf-8')
-#           outputstr = outputstr.replace('\xc3', '')
         return assistant_soundprocess.CreateSoundProcessAplay(assistant_soundprocess.CreateVoiceOut(outputstr), voiceVolume)
     except KeyError:
         outputstr = "Encoding fehlgeschlagen!"
@@ -107,13 +99,10 @@ def LoadRSS(provider):
     try:
         feedData = feedparser.parse(feedUrl)
         outputstr = "Es wurden " + str(len(feedData)) + " Schlagzeilen von " + provider + " abgerufen."
-#           outputstr = feedData['feed']['title'] + " Abgerufen am " + strftime("%d.%m.%Y um %X ", localtime()) + " "
     except KeyError:
-#           outputstr = "Laden der Daten von Spiegel.de fehlgeschlagen!"
         outputstr = "Kein Netzwerk zum Laden der Schlagzeilen."
         feedData = 0
     if str(feedData).find("bozo_exception") > 0:
-#           outputstr = "Laden der Daten von Spiegel.de fehlgeschlagen!"
         outputstr = "Kein Netzwerk zum Laden der Schlagzeilen."
         feedData = 0
     if feedData != 0:
