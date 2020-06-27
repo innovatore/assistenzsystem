@@ -44,8 +44,6 @@ def PlaySong(g, l, t):
         global songId
         global songCount
         assistant_soundprocess.CleanUpSoundProcessList()
-#        PlayMusic(songId)
-#        songId = songId + 1
         PlayMusicRandomly()
 
 
@@ -93,9 +91,7 @@ def PlayMusicRandomly():
 
 def PlayWaitMusic():
     print("PlayWaitMusic")
-#    waitMusic = '/home/pi/Music/Elevator Music.mp3'
     waitMusic = '/home/pi/Music/ps4 main.mp3'
-#    waitMusic = '/home/pi/Music/Nintendo 3DS.mp3'
     return assistant_soundprocess.CreateSoundProcessMPG123ForWait(waitMusic, 18)
 
 def SilenceSounds():
