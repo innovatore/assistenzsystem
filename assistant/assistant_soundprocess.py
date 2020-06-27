@@ -6,8 +6,6 @@ soundProcessListWav = []
 soundProcessListLocations = []
 soundProcesses = []
 
-
-
 ###############################################################################################
 
 def CreateSoundProcessAplay(fileLocation, volume):
@@ -78,8 +76,7 @@ def IsSoundProcessActive():
         for soundProcess in soundProcessListWav:
             if psutil.pid_exists(soundProcess):
                 returnValue = True
-                break
-    
+                break 
     return returnValue
 
 def CleanUpSoundProcessList():
@@ -87,10 +84,8 @@ def CleanUpSoundProcessList():
     global soundProcessListWav
     for soundProcess in soundProcessList:
         KillSoundProcessByPID(soundProcess)
-#        soundProcessList.remove(soundProcess)
     for soundProcess in soundProcessListWav:
         KillSoundProcessByPID(soundProcess)
-#        soundProcessListWav.remove(soundProcess)
 
 def KillSoundProcessByPID(pidToKill):
     print ("Kill PID") 
