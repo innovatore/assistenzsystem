@@ -3,10 +3,6 @@ import pigpio
 import array
 import os
 
-#pi = pigpio.pi()
-#if not pi.connected:
-#   exit()
-
 pin = 17
 
 def Measure(pi):
@@ -47,5 +43,3 @@ def Measure(pi):
     os.system("amixer sset PCM,0 " + str(setVolume) + "%")
     return result / iterationCount
 
-#while True:
-#    print (Measure())
