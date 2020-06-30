@@ -62,23 +62,23 @@ def LoadWeatherData(weatherString = weatherString):
             urlWeather = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&lang=de&units=metric&appid=[Your Api Access Token]"
             weatherDataRaw = urllib.request.urlopen(urlWeather).read()
             print (weatherDataRaw)
-            WeatherData = json.loads(weatherDataRaw.decode("utf-8"))
-            print (WeatherData)
+            weatherData = json.loads(weatherDataRaw.decode("utf-8"))
+            print (weatherData)
             try:
                 outputstr = ", Wetter in {} ".format(js["region_name"])
             except KeyError:
                 outputstr = ""
             try:  
-                outputstr = outputstr + "{}, ".format(WeatherData["name"])
+                outputstr = outputstr + "{}, ".format(weatherData["name"])
             except KeyError:
                 outputstr = outputstr
             try:       
-                outputstr = outputstr + "{}".format(str(WeatherData["weather"]).split(": ")[3].split(",")[0])
+                outputstr = outputstr + "{}".format(str(weatherData["weather"]).split(": ")[3].split(",")[0])
             except KeyError:
                 outputstr = outputstr
-            print(format(WeatherData["main"]["temp"],'n') + " Hallo " + locale.format("%.2f",12000,1))
+            print(format(weatherData["main"]["temp"],'n') + " Hallo " + locale.format("%.2f",12000,1))
             try:
-                weatherString.append(outputstr + ", bei {} Grad Celsius.".format(format(WeatherData["main"]["temp"], 'n')))
+                weatherString.append(outputstr + ", bei {} Grad Celsius.".format(format(weatherData["main"]["temp"], 'n')))
             except KeyError:
                 outputstr = outputstr
         except ValueError:
