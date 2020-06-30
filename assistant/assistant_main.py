@@ -6,6 +6,9 @@ import assistant_newsfeed
 import assistant_weather
 import assistant_volumecontrol
 
+from datetime import datetime
+from datetime import timedelta
+
 pi = pigpio.pi()
 if not pi.connected:
    exit()
@@ -17,7 +20,6 @@ pin4 = 18
 
 glitchValue = 200
 assistant_music.PlayWaitMusic()
-
 os.system("amixer sset PCM,0 95%")
 
 def InitializeData():
@@ -55,7 +57,10 @@ InitializeButtons()
 time.sleep(3)
 assistant_music.SilenceSounds()
 assistant_music.SaySomething("System gestartet, warte auf Eingabe.")
+savedTime = datetime.now()
 
 while True:
-#    assistant_weather.LoadWeatherData()
+    if savedTime + timedelta(minutes=10) < datetime.now():
+        assistant_weather.LoadWeatherData()
+        savedTime = datetime.now()
     print(assistant_volumecontrol.Measure(pi))
